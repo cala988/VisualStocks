@@ -49,4 +49,13 @@
         <MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
     </ItemGroup>
 
+    <ItemGroup>
+      <AndroidResource Remove="Api\**" />
+      <Compile Remove="Api\**" />
+      <Content Remove="Api\**" />
+      <EmbeddedResource Remove="Api\**" />
+      <MauiXaml Remove="Api\**" />
+      <None Remove="Api\**" />
+    </ItemGroup>
+
 </Project>

@@ -1,6 +1,6 @@
 ﻿namespace VisualStocks.Application.Services
 {
-    internal interface IStockService
+    internal interface IStocksService
     {
         void GetStock(string stock);
     }
