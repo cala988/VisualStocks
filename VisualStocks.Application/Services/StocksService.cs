@@ -1,4 +1,5 @@
 ﻿using VisualStocks.Application.Entities;
+using VisualStocks.Application.Interfaces;
 
 namespace VisualStocks.Application.Services
 {
