@@ -1,5 +1,4 @@
-﻿using System.Net.Http.Headers;
-using System.Text.Json;
+﻿using System.Text.Json;
 using VisualStocks.Application.Entities.Scrapper;
 using VisualStocks.Application.Interfaces;
 
@@ -9,21 +8,33 @@ namespace VisualStocks.Application.Services.Finviz
     {
         private readonly IScrapperService _scrapperService;
 
-        private ScrapperTable Table;
+        public ScrapperTable ScrapperTable { get; set;} = new ScrapperTable();
 
         public ScrapperTableService(IScrapperService scrapperService)
         {
             _scrapperService = scrapperService;
         }
 
-        public void AddValueToTable(int number, string value)
+        public void AddValueToTable(int row, int column, string value)
         {
-            Table.AddValueToCell(number, value);
+            ScrapperTable.UpdateCellValue(row, column, value);
         }
 
-        public void InitializeScrapperTableFromJson(string jsonTable)
+        public void GetCellFromTable(int row, int column)
         {
-            Table = JsonSerializer.Deserialize<ScrapperTable>(jsonTable);
+            ScrapperTable.GetCell(row, column);
+        }
+
+        public ScrapperTable InitializeScrapperTableFromJson(string jsonTable)
+        {
+            ScrapperTable = JsonSerializer.Deserialize<ScrapperTable>(jsonTable);
+
+            if(ScrapperTable == null)
+            {
+                return new ScrapperTable();
+            }
+
+            return ScrapperTable;
         }
 
     }

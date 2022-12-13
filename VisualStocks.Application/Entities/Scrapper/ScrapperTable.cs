@@ -2,25 +2,26 @@
 
 namespace VisualStocks.Application.Entities.Scrapper
 {
+    [Serializable]
     public class ScrapperTable
     {
-        public ScrapperCell[] Cells { get; set; }
+        public List<ScrapperCell> Cells { get; set; } = new List<ScrapperCell>();
 
-        public void UpdateCellValue(int CellNumber, string cellValue)
+        public void UpdateCellValue(int row, int column, string cellValue)
         {
-            var cell = GetCell(CellNumber);
-
-            cell.Value = cellValue;
+            Cells.Where(x => x.Row == row && x.Column == column)
+                .ToList()
+                .ForEach(x => x.Value = cellValue);
         }
 
-        public ScrapperCell GetCell(int CellNumber)
+        public ScrapperCell GetCell(int row, int column)
         {
-            return Cells[CellNumber];
+            return Cells.First(x => x.Row == row && x.Column == column);
         }
 
-        public void AddValueToCell(int CellNumber, string value)
+        public void AddCell(int row, int column, string name)
         {
-            Cells[CellNumber].Value = value;
+            Cells.Add(new ScrapperCell(name, row, column));
         }
 
     }

@@ -1,8 +1,11 @@
-﻿namespace VisualStocks.Application.Interfaces
+﻿using VisualStocks.Application.Entities.Scrapper;
+
+namespace VisualStocks.Application.Interfaces
 {
     public interface IScrapperTableService
     {
-        void AddValueToTable(int number, string value);
-        void InitializeScrapperTableFromJson(string jsonTable);
+        void AddValueToTable(int row, int column, string value);
+        void GetCellFromTable(int row, int column);
+        ScrapperTable InitializeScrapperTableFromJson(string jsonTable);
     }
 }
