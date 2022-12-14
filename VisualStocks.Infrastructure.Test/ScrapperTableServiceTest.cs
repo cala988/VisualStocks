@@ -26,7 +26,7 @@ namespace VisualStocks.Infrastructure.Test
         {
             string json = GetJsonFromFile();
 
-            _scrapperTableService.InitializeScrapperTableFromJson(json);
+            _scrapperTableService.InitializeScrapperTableFromJsonTableStructure(json);
 
             _scrapperTableService.ScrapperTable.Cells.Should().HaveCount(72);
 

@@ -1,9 +1,11 @@
-﻿using System.Text.Json;
+﻿using HtmlAgilityPack;
+using System.Text.Json;
 using VisualStocks.Application.Entities.Scrapper;
 using VisualStocks.Application.Interfaces;
 
 namespace VisualStocks.Application.Services.Finviz
 {
+
     public class ScrapperTableService : IScrapperTableService
     {
         private readonly IScrapperService _scrapperService;
@@ -25,9 +27,14 @@ namespace VisualStocks.Application.Services.Finviz
             ScrapperTable.GetCell(row, column);
         }
 
-        public ScrapperTable InitializeScrapperTableFromJson(string jsonTable)
+        public void AddCellToTable(int row, int column, string name, string value)
         {
-            ScrapperTable = JsonSerializer.Deserialize<ScrapperTable>(jsonTable);
+            ScrapperTable.AddCell(row, column, name, value);
+        }
+
+        public ScrapperTable InitializeScrapperTableFromJsonTableStructure(string jsonTableStructure)
+        {
+            ScrapperTable = JsonSerializer.Deserialize<ScrapperTable>(jsonTableStructure);
 
             if(ScrapperTable == null)
             {

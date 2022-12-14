@@ -4,6 +4,7 @@ using System.Linq;
 using System;
 using VisualStocks.Infrastructure.Services;
 using Xunit;
+using System.Drawing;
 
 namespace VisualStocks.Infrastructure.Test
 {
@@ -45,13 +46,35 @@ namespace VisualStocks.Infrastructure.Test
             var ValuationsTableNode = doc.DocumentNode.SelectSingleNode(valuationsTableXpath);
 
             var rowsNodes = ValuationsTableNode.SelectNodes("//tr[@class='table-dark-row']");
-            foreach(var row in rowsNodes)
+            for (int r = 0; r < rowsNodes.Count; r++)
             {
-                var cells = row.SelectNodes("//td[@class='snapshot-td2']");
-                for(int i = 0; i < cells.Count; i++)
+                var row = rowsNodes[0];
+                string name; 
+                string value;
+                for(int i = 0; i < row.ChildNodes.Count; i++)
                 {
-                    Console.WriteLine(cells[i].InnerText.Trim());
+                    if (!row.ChildNodes[i].Name.Contains("td"))
+                    {
+                        continue;
+                    }
+
+                    if (row.ChildNodes[i].ChildNodes[0].Name.Contains("Name"))
+                    {
+                        value = string.Empty;
+                        name = row.ChildNodes[i].InnerText;
+                    }
+
+                    if (row.ChildNodes[i].ChildNodes[0].Name.Contains("b"))
+                    {
+                        value = row.ChildNodes[i].InnerText;
+                    }
+
                 }
+                //var cells = row.SelectNodes("//td[@class='snapshot-td2']");
+                //for (int i = 0; i < cells.Count; i++)
+                //{
+                //    Console.WriteLine(cells[i].InnerText.Trim());
+                //}
             }
 
             doc.DocumentNode.Should().NotBeNull();

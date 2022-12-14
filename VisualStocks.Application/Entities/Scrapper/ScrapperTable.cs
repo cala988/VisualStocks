@@ -24,5 +24,10 @@ namespace VisualStocks.Application.Entities.Scrapper
             Cells.Add(new ScrapperCell(name, row, column));
         }
 
+        public void AddCell(int row, int column, string name, string value)
+        {
+            Cells.Add(new ScrapperCell(name, value, row, column));
+        }
+
     }
 }
