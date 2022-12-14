@@ -15,5 +15,13 @@
             Column = column;
         }
 
+        public ScrapperCell(string name, string value, int row, int column)
+        {
+            Name = name;
+            Value = value;
+            Row = row;
+            Column = column;
+        }
+
     }
 }
